@@ -66,4 +66,30 @@ export class Vec3 {
         if (val >= 1) { return other; }
         return this.mul(1 - val).add(other.mul(val));
     }
+
+    distance_sqr(this: Vec3, other: Vec3): number {
+        let dx_sqr = (this.x - other.x) * (this.x - other.x);
+        let dy_sqr = (this.y - other.y) * (this.y - other.y);
+        let dz_sqr = (this.z - other.z) * (this.z - other.z);
+        return dx_sqr + dy_sqr + dz_sqr;
+    }
+
+    distance(this: Vec3, other: Vec3): number {
+        return Math.sqrt(this.distance_sqr(other));
+    }
+
+    norm_sqr(this: Vec3): number {
+        let x_sqr = this.x * this.x;
+        let y_sqr = this.y * this.y;
+        let z_sqr = this.z * this.z;
+        return x_sqr + y_sqr + z_sqr;
+    }
+
+    norm(this: Vec3): number {
+        return Math.sqrt(this.norm_sqr());
+    }
+
+    normalise(this: Vec3): Vec3 {
+        return this.div(this.norm());
+    }
 }
