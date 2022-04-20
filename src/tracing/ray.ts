@@ -22,12 +22,3 @@ export class HitRecord {
         this.surface_normal = surface_normal;
     }
 }
-
-export class MaterialRecord extends HitRecord {
-    public color: Color;
-
-    constructor(hit_record: HitRecord, color: Color) {
-        super(hit_record.t, hit_record.local_hit_point, hit_record.surface_normal);
-        this.color = color;
-    }
-}

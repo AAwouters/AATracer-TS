@@ -1,14 +1,14 @@
 import { Ray } from "../../tracing/ray";
 import { HitRecord } from "../../tracing/ray";
-import { Color } from "../color";
+import { Material } from "../material";
 
 export class SceneObject implements Shape {
     public shape: Shape;
-    public color: Color;
+    public material: Material;
 
-    constructor(shape: Shape, color: Color) {
+    constructor(shape: Shape, material: Material) {
         this.shape = shape;
-        this.color = color;
+        this.material = material;
     }
 
     hit_record(ray: Ray): HitRecord | null {

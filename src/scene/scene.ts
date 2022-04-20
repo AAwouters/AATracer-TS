@@ -1,5 +1,6 @@
-import { MaterialRecord, Ray } from "../tracing/ray";
+import { Ray } from "../tracing/ray";
 import { Color } from "./color";
+import { MaterialRecord } from "./material";
 import { SceneObject } from "./object/scene_object";
 
 export class Scene {
@@ -19,7 +20,7 @@ export class Scene {
         let material_record = this.closest_hit_in_front(ray);
 
         if (material_record != null) {
-            return material_record.color;
+            return material_record.material.color;
         } else {
             return this.background_color;
         }
@@ -34,7 +35,7 @@ export class Scene {
 
             if (hit_record != null) {
                 t_min = hit_record.t;
-                result = new MaterialRecord(hit_record, object.color);
+                result = new MaterialRecord(hit_record, object.material);
             }
         }
 
