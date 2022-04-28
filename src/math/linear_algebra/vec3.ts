@@ -1,3 +1,5 @@
+import { clamp } from "../utility";
+
 /// Container for every structure that containts 3 numbers
 class Vec3 {
     val: [number, number, number];
@@ -92,6 +94,14 @@ class Vec3 {
 
     normalise(this: Vec3): Vec3 {
         return this.div(this.norm());
+    }
+
+    pow(this: Vec3, value: number): Vec3 {
+        return new Vec3(
+            Math.pow(this.val[0], value),
+            Math.pow(this.val[1], value),
+            Math.pow(this.val[2], value),
+        );
     }
 }
 

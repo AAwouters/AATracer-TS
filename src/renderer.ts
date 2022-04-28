@@ -40,6 +40,10 @@ export class Renderer {
 
     set_pixel(frame: Uint8ClampedArray, x: number, y: number, color: Color) {
         let index = 4 * (x + y * this.width);
+        let inv_gamma = 1 / 2.2;
+        color = color.pow(inv_gamma);
+        color = color.clamp(0, 1);
+
         let color_byte = color.mul(255);
         frame[index] = color_byte.r();
         frame[index + 1] = color_byte.g();

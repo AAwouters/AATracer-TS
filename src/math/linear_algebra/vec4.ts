@@ -1,3 +1,5 @@
+import { clamp } from "../utility";
+
 export class Vec4 {
     public val: [number, number, number, number];
     
