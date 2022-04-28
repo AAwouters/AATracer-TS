@@ -1,4 +1,5 @@
 import { Vector3, Color } from "./math";
+import { generate_samples, SampleType } from "./math/sampling";
 import { Scene } from "./scene/scene";
 import { Ray } from "./tracing/ray";
 
@@ -6,11 +7,16 @@ export class Renderer {
     width: number;
     height: number;
     scene: Scene;
+    sample_type: SampleType;
+    nb_of_samples: number;
+
 
     constructor(width: number, height: number) {
         this.width = width;
         this.height = height;
         this.scene = new Scene();
+        this.sample_type = SampleType.Regular;
+        this.nb_of_samples = 9;
     }
 
     public set_scene(scene: Scene) {
@@ -27,15 +33,30 @@ export class Renderer {
     }
 
     public render_pixel(row: number, column: number): Color {
-        let x = column - 0.5 * this.width;
-        let y = (this.height - row) - 0.5 * this.height;
 
-        let ray = new Ray(
-            new Vector3(x, y, 0),
-            Vector3.unit_z().inv()
-        );
 
-        return this.scene.trace_ray(ray);
+        let samples = generate_samples(this.sample_type, this.nb_of_samples);
+        let samples_size = samples.length;
+
+        let result = Color.black();
+
+        samples.forEach(sample => {
+            let sample_x = 2 * sample.x() - 1;
+            let sample_y = 2 * sample.y() - 1;
+            
+            let x = column - 0.5 * this.width + sample_x;
+            let y = (this.height - row) - 0.5 * this.height + sample_y;
+            
+            let ray = new Ray(
+                new Vector3(x, y, 0),
+                Vector3.unit_z().inv()
+            );
+
+            result = result.add(this.scene.trace_ray(ray));
+        });
+
+
+        return result.div(samples_size);
     }
 
     set_pixel(frame: Uint8ClampedArray, x: number, y: number, color: Color) {
