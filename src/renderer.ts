@@ -28,7 +28,7 @@ export class Renderer {
 
     public render_pixel(row: number, column: number): Color {
         let x = column - 0.5 * this.width;
-        let y = row - 0.5 * this.height;
+        let y = (this.height - row) - 0.5 * this.height;
 
         let ray = new Ray(
             new Vector3(x, y, 0),
