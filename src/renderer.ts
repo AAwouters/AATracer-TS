@@ -10,7 +10,6 @@ export class Renderer {
     sample_type: SampleType;
     nb_of_samples: number;
 
-
     constructor(width: number, height: number) {
         this.width = width;
         this.height = height;
@@ -33,8 +32,6 @@ export class Renderer {
     }
 
     public render_pixel(row: number, column: number): Color {
-
-
         let samples = generate_samples(this.sample_type, this.nb_of_samples);
         let samples_size = samples.length;
 
@@ -54,7 +51,6 @@ export class Renderer {
 
             result = result.add(this.scene.trace_ray(ray));
         });
-
 
         return result.div(samples_size);
     }
