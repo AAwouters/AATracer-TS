@@ -1,6 +1,5 @@
-import { KEPSILON, Vec3 } from "../math";
+import { KEPSILON, Vector3, Point3, Color } from "../math";
 import { Ray } from "../tracing/ray";
-import { Color } from "./color";
 import { Light } from "./light";
 import { MaterialRecord } from "./material";
 import { SceneObject } from "./object/scene_object";
@@ -34,7 +33,7 @@ export class Scene {
         }
     }
 
-    shade(this: Scene, material_record: MaterialRecord, w_out: Vec3): Color {
+    shade(this: Scene, material_record: MaterialRecord, w_out: Vector3): Color {
         let color = Color.black();
 
         for (let light of this.lights) {
@@ -65,7 +64,7 @@ export class Scene {
         return result;
     }
 
-    public any_hit_between(a: Vec3, b: Vec3): boolean {
+    public any_hit_between(a: Point3, b: Point3): boolean {
         let ray = new Ray(a, b.sub(a));
 
         let t_min = KEPSILON;

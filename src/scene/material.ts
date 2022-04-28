@@ -1,7 +1,6 @@
-import { Vec3 } from "../math";
+import { Color, Vector3, Point3 } from "../math";
 import { PI_INV } from "../math/constants";
 import { HitRecord } from "../tracing/ray";
-import { Color } from "./color"
 
 export class Material {
     diffuse_color: Color;
@@ -63,7 +62,7 @@ export class MaterialRecord extends HitRecord {
         this.material = material;
     }
 
-    public scatter(this: MaterialRecord, w_in: Vec3, w_out: Vec3): Color {
+    public scatter(this: MaterialRecord, w_in: Vector3, w_out: Vector3): Color {
         let normal = this.surface_normal;
         let normal_dot_w_in = normal.dot(w_in);
         let normal_dot_w_out= normal.dot(w_out);

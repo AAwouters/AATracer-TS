@@ -1,5 +1,4 @@
-import { Vec3 } from "./math";
-import { Color } from "./scene/color";
+import { Vector3, Color } from "./math";
 import { Scene } from "./scene/scene";
 import { Ray } from "./tracing/ray";
 
@@ -32,8 +31,8 @@ export class Renderer {
         let y = row - 0.5 * this.height;
 
         let ray = new Ray(
-            new Vec3(x, y, 0),
-            Vec3.unit_z().inv()
+            new Vector3(x, y, 0),
+            Vector3.unit_z().inv()
         );
 
         return this.scene.trace_ray(ray);

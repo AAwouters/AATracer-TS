@@ -1,12 +1,9 @@
-export class Vec3 {
-    public x: number;
-    public y: number;
-    public z: number;
+/// Container for every structure that containts 3 numbers
+class Vec3 {
+    val: [number, number, number];
     
-    constructor(x: number, y: number, z: number) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    constructor(val0: number, val1: number, val2: number) {
+        this.val = [val0, val1, val2];   
     }
 
     public static zeros():  Vec3 { return new Vec3(0, 0, 0); }
@@ -15,32 +12,36 @@ export class Vec3 {
     public static unit_z(): Vec3 { return new Vec3(0, 0, 1); }
     public static ones():   Vec3 { return new Vec3(1, 1, 1); }
     
-    r(): number { return this.x; }
-    g(): number { return this.y; }
-    b(): number { return this.z; }
+    x(): number { return this.val[0]; }
+    y(): number { return this.val[1]; }
+    z(): number { return this.val[2]; }
+
+    r(): number { return this.val[0]; }
+    g(): number { return this.val[1]; }
+    b(): number { return this.val[2]; }
 
     add(this: Vec3, other: Vec3): Vec3 {
-        return new Vec3(this.x + other.x, this.y + other.y, this.z + other.z);
+        return new Vec3(this.val[0] + other.val[0], this.val[1] + other.val[1], this.val[2] + other.val[2]);
     }
 
     sub(this: Vec3, other: Vec3): Vec3 {
-        return new Vec3(this.x - other.x, this.y - other.y, this.z - other.z);
+        return new Vec3(this.val[0] - other.val[0], this.val[1] - other.val[1], this.val[2] - other.val[2]);
     }
 
     div(this: Vec3, divisor: number): Vec3 {
-        return new Vec3(this.x / divisor, this.y / divisor, this.z / divisor);
+        return new Vec3(this.val[0] / divisor, this.val[1] / divisor, this.val[2] / divisor);
     }
 
     mul(this: Vec3, multiplier: number): Vec3 {
-        return new Vec3(this.x * multiplier, this.y * multiplier, this.z * multiplier);
+        return new Vec3(this.val[0] * multiplier, this.val[1] * multiplier, this.val[2] * multiplier);
     }
 
     dot(this: Vec3, other: Vec3): number {
-        return this.x * other.x + this.y * other.y + this.z * other.z;
+        return this.val[0] * other.val[0] + this.val[1] * other.val[1] + this.val[2] * other.val[2];
     }
 
     inv(this: Vec3): Vec3 {
-        return new Vec3(-this.x, -this.y, -this.z);
+        return new Vec3(-this.val[0], -this.val[1], -this.val[2]);
     }
 
     clamp(this: Vec3, min: number, max: number): Vec3;
@@ -55,9 +56,9 @@ export class Vec3 {
         }
         
         return new Vec3(
-            clamp(this.x, min.x, max.x),
-            clamp(this.y, min.y, max.y),
-            clamp(this.z, min.z, max.z)
+            clamp(this.val[0], min.val[0], max.val[0]),
+            clamp(this.val[1], min.val[1], max.val[1]),
+            clamp(this.val[2], min.val[2], max.val[2])
         );
     }
 
@@ -68,9 +69,9 @@ export class Vec3 {
     }
 
     distance_sqr(this: Vec3, other: Vec3): number {
-        let dx_sqr = (this.x - other.x) * (this.x - other.x);
-        let dy_sqr = (this.y - other.y) * (this.y - other.y);
-        let dz_sqr = (this.z - other.z) * (this.z - other.z);
+        let dx_sqr = (this.val[0] - other.val[0]) * (this.val[0] - other.val[0]);
+        let dy_sqr = (this.val[1] - other.val[1]) * (this.val[1] - other.val[1]);
+        let dz_sqr = (this.val[2] - other.val[2]) * (this.val[2] - other.val[2]);
         return dx_sqr + dy_sqr + dz_sqr;
     }
 
@@ -79,9 +80,9 @@ export class Vec3 {
     }
 
     norm_sqr(this: Vec3): number {
-        let x_sqr = this.x * this.x;
-        let y_sqr = this.y * this.y;
-        let z_sqr = this.z * this.z;
+        let x_sqr = this.val[0] * this.val[0];
+        let y_sqr = this.val[1] * this.val[1];
+        let z_sqr = this.val[2] * this.val[2];
         return x_sqr + y_sqr + z_sqr;
     }
 
@@ -92,4 +93,15 @@ export class Vec3 {
     normalise(this: Vec3): Vec3 {
         return this.div(this.norm());
     }
+}
+
+/// Specific names for Vec3 container
+export class Vector3 extends Vec3 { };
+export class Point3 extends Vec3 { };
+export class Color extends Vec3 {
+    static black(): Color { return new Color(0, 0, 0); }
+    static red():   Color { return new Color(1, 0, 0); }
+    static green(): Color { return new Color(0, 1, 0); }
+    static blue():  Color { return new Color(0, 0, 1); }
+    static white(): Color { return new Color(1, 1, 1); }
 }

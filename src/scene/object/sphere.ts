@@ -1,13 +1,13 @@
-import { KEPSILON, Vec3 } from "../../math";
+import { KEPSILON, Point3 } from "../../math";
 import { HitRecord } from "../../tracing/ray";
 import { Ray } from "../../tracing/ray";
 import { Shape } from "./scene_object";
 
 export class Sphere implements Shape {
-    center: Vec3;
+    center: Point3;
     radius: number;
 
-    constructor(center: Vec3, radius: number) {
+    constructor(center: Point3, radius: number) {
         this.center = center;
         this.radius = radius;
     }
