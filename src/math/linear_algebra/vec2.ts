@@ -1,3 +1,5 @@
+import { random_in_range } from "../utility";
+
 /// Container for every structure that containts 3 numbers
 class Vec2 {
     val: [number, number];
@@ -11,10 +13,11 @@ class Vec2 {
     public static unit_y(): Vec2 { return new Vec2(0, 1); }
     public static ones():   Vec2 { return new Vec2(1, 1); }
 
-    public static sample_unit_square(): Vec2 {
+    public static random(): Vec2 { return new Vec2(Math.random(), Math.random()); }
+    public static random_in_range(min: number, max: number): Vec2 {
         return new Vec2(
-            Math.random(),
-            Math.random(),
+            random_in_range(min, max),
+            random_in_range(min, max),
         );
     }
     

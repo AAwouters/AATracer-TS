@@ -1,4 +1,4 @@
-import { clamp } from "../utility";
+import { clamp, random_in_range } from "../utility";
 
 /// Container for every structure that containts 3 numbers
 class Vec3 {
@@ -14,6 +14,22 @@ class Vec3 {
     public static unit_z(): Vec3 { return new Vec3(0, 0, 1); }
     public static ones():   Vec3 { return new Vec3(1, 1, 1); }
     
+    public static random(): Vec3 { return new Vec3(Math.random(), Math.random(), Math.random()); }
+    public static random_in_range(min: number, max: number): Vec3 {
+        return new Vec3(
+            random_in_range(min, max),
+            random_in_range(min, max),
+            random_in_range(min, max)
+        );
+    }
+    public static random_in_unit_sphere(): Vec3 {
+        while (true) {
+            let vec = Vec3.random_in_range(-1,1);
+            if (vec.norm_sqr() > 1) continue;
+            return vec;
+        }
+    }
+
     x(): number { return this.val[0]; }
     y(): number { return this.val[1]; }
     z(): number { return this.val[2]; }

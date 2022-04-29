@@ -37,7 +37,7 @@ function generate_random_samples(nb_of_samples: number): Point2[] {
     let result = new Array(nb_of_samples);
 
     for (let i = 0; i < nb_of_samples; i++) {
-        result.push(Point2.sample_unit_square());
+        result.push(Point2.random());
     }
 
     return result;
