@@ -58,7 +58,7 @@ export class Scene {
         for (let object of this.objects) {
             let hit_record = object.shape.hit_record(ray);
 
-            if (hit_record != null) {
+            if (hit_record != null && hit_record.t < t_min) {
                 t_min = hit_record.t;
                 result = new MaterialRecord(hit_record, object.material);
             }
