@@ -1,16 +1,19 @@
 import { KEPSILON, Vector3, Point3, Color } from "../math";
 import { Ray } from "../tracing/ray";
+import { Camera, PinpointCamera } from "./camera";
 import { Light } from "./light";
 import { MaterialRecord } from "./material";
 import { SceneObject } from "./object/scene_object";
 
 export class Scene {
     background_color: Color;
+    camera: Camera;
     objects: SceneObject[];
     lights: Light[];
 
     constructor() {
         this.background_color = Color.black();
+        this.camera = new PinpointCamera();
         this.objects = [];
         this.lights = [];
     }

@@ -41,13 +41,10 @@ export class Renderer {
             let sample_x = 2 * sample.x() - 1;
             let sample_y = 2 * sample.y() - 1;
             
-            let x = column - 0.5 * this.width + sample_x;
-            let y = (this.height - row) - 0.5 * this.height + sample_y;
+            let u = (column + sample_x) / (this.width - 1);
+            let v = (this.height - row + sample_y) / (this.height -1);
             
-            let ray = new Ray(
-                new Vector3(x, y, 0),
-                Vector3.unit_z().inv()
-            );
+            let ray = this.scene.camera.get_ray(u, v);
 
             result = result.add(this.scene.trace_ray(ray));
         });

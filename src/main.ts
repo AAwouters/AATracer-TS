@@ -1,8 +1,9 @@
 import { Renderer } from "./renderer";
 import { single_sphere } from "./scenes";
 
+const ASPECT_RATIO = 16/9;
 const WINDOW_WIDTH = 640;
-const WINDOW_HEIGHT = 480;
+const WINDOW_HEIGHT = Math.floor(WINDOW_WIDTH / ASPECT_RATIO);
 
 const canvas = document.createElement('canvas');
 canvas.id = 'TracingCanvas';
